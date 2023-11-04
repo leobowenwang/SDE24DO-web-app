@@ -35,4 +35,14 @@ yarn-error.log*
 next-env.d.ts
 
 # terraform
-terraform/.terraform/
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.pem
+*.key
+secrets.tfvars
+*.tfplan
+override.tf
+*_override.tf
+.terraform.lock.hcl
+crash.log
