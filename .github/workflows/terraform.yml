@@ -3,7 +3,6 @@ name: Deploy to AWS with Terraform
 on:
   push:
     branches:
-      - main
       - release
 
 jobs:
@@ -26,15 +25,18 @@ jobs:
         uses: hashicorp/setup-terraform@v2
 
       - name: Terraform Initialize
-        id: init
         run: terraform init
+
+      - name: Terraform Format and Validate
+        run: |
+          terraform fmt -check
+          terraform validate
 
       - name: Terraform Plan
         id: plan
         run: terraform plan
 
       - name: Terraform Apply
-        id: apply
         run: terraform apply -auto-approve
         env:
           TF_VAR_ecr_repository_url: ${{ secrets.ECR_REPOSITORY_URL }}
